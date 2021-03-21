@@ -12,5 +12,5 @@ steps:
   inputs:
     sshEndpoint: 'ssh-MyPrivateHost-service-connection'
     runOptions: 'commands'
-    commands: 'docker run -d --name web-test -p 80:8000 crccheck/hello-world'
+    commands: 'sudo docker run -d --name web-test -p 80:8000 crccheck/hello-world'
     readyTimeout: '20000'
