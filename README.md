@@ -171,3 +171,33 @@ Values
 - Service connection name: `ssh-MyPrivateHost-service-connection`
 
 ## Create a pipeline that creates a docker container
+
+`Add azure-pipelines.yml` and configure DevOps
+
+```sh
+trigger:
+- master
+
+pool:
+  name: 'MyAgentPool'
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'ssh-MyPrivateHost-service-connection'
+    runOptions: 'commands'
+    commands: 'docker run -d --name web-test -p 80:8000 crccheck/hello-world'
+    readyTimeout: '20000'
+```
+
+## After the pipeline has run
+
+- `apt install curl`
+- `curl 10.0.0.5`
+
+success!
+
+## TODO: Why is each docker thing in SSH failing
