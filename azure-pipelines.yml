@@ -1,0 +1,16 @@
+trigger:
+- master
+
+pool:
+  name: 'MyAgentPool'
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'ssh-MyPrivateHost-service-connection'
+    runOptions: 'commands'
+    commands: 'sudo docker run -d --name web-test -p 80:8000 crccheck/hello-world'
+    readyTimeout: '20000'
